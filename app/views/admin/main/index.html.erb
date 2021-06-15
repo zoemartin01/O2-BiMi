@@ -1,0 +1,75 @@
+<div class="row">
+  <h1 class="display-2 text-center">Admin Dashboard</h1>
+</div>
+
+<div class="container justify-content-center">
+  <div class="row">
+    <div class="col">
+      <table class="table">
+        <thead class="thead-dark">
+        <tr>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Stock</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @low_stock.each do |drink| %>
+          <tr>
+            <td>
+              <%= drink.name %>
+            </td>
+            <td>
+              <%= number_with_precision(drink.price, :precision => 2) %>€
+            </td>
+            <td>
+              <% if drink.stock < 10 %>
+                <span class="text-danger"><%= drink.stock %></span>
+              <% else %>
+                <%= drink.stock %>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to "More...", admin_drink_path(drink), class: "btn btn-outline-dark", role: "button" %>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="col">
+      <table class="table">
+        <thead class="thead-dark">
+        <tr>
+          <th>Name</th>
+          <th>Room</th>
+          <th>Balance</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @low_balance.each do |user| %>
+          <tr>
+            <td>
+              <%= user.name %>
+            </td>
+            <td>
+              <%= user.room %>
+            </td>
+            <td>
+              <% if user.balance < 0 %>
+                <span class="text-danger"><%= number_with_precision(user.balance, :precision => 2) %>€</span>
+              <% else %>
+                <%= number_with_precision(user.balance, :precision => 2) %>€
+              <% end %>
+            </td>
+            <td>
+              <%= link_to "More...", admin_user_path(user), class: "btn btn-outline-dark", role: "button" %>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

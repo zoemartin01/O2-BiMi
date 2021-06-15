@@ -1,0 +1,72 @@
+<div class="row">
+  <h1 class="display-2 text-center"><%= @user.name %></h1>
+</div>
+
+
+<div class="row justify-content-center">
+  <div class="col-auto">
+    <table class="table table-borderless">
+      <tbody>
+      <tr>
+        <th>E-Mail</th>
+        <th><%= @user.email %></th>
+      </tr>
+      <tr>
+        <th>Room</th>
+        <th><%= @user.room %></th>
+      </tr>
+      <tr>
+        <th>Balance</th>
+        <th><%= number_with_precision(@user.balance, :precision => 2) %>€</th>
+      </tr>
+      <tr>
+        <th>Enabled</th>
+        <th><%= check_box_tag :enabled, @user.enabled, @user.enabled, class: "form-check-input", :disabled => true %></th>
+      </tr>
+      <tr>
+        <th>Admin</th>
+        <th><%= check_box_tag :admin, @user.admin, @user.admin, class: "form-check-input", :disabled => true %></th>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<br>
+
+<div class="row">
+  <h1 class="display-3 text-center">Transactions</h1>
+</div>
+<div class="row">
+  <table class="table table-striped">
+    <thead class="thead-dark">
+    <tr>
+      <th>Drink</th>
+      <th>Stock Change</th>
+      <th>Balance Change</th>
+      <th>Comment</th>
+      <th class="col-md-2"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @user.transactions.each do |transaction| %>
+      <tr>
+        <td>
+          <% if transaction.drink != nil %>
+              <%= transaction.drink.name %>
+          <% end %>
+        </td>
+        <td><%= transaction.stock_change %></td>
+        <td><%= number_with_precision(transaction.balance_change, :precision => 2) %>€</td>
+        <td><%= transaction.comment %></td>
+        <td>
+          <%= link_to "More...", admin_transaction_path(transaction), class: "btn btn-outline-dark", role: "button" %>
+          <%= link_to "Undo", admin_transaction_path(transaction),
+                      method: :delete,
+                      data: { confirm: "Are you sure?" }, class: "btn btn-danger", role: "button"%></td>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

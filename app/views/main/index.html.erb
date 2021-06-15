@@ -1,0 +1,14 @@
+<div class="row">
+  <% drinks.each do |drink| %>
+    <div class="col-sm-4">
+      <div class="card m-2">
+        <div class="card-body">
+          <h5 class="card-title"><%= drink.name %></h5>
+          <span class="card-text">Price: <%= number_with_precision(drink.price, :precision => 2) %>€</span>
+          <p class="card-text">Stock: <%= drink.stock %></p>
+          <%= link_to "Buy", { controller: 'user/transactions', action: 'new', drink_id: drink.id }, class: "btn btn-primary", role: "button" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

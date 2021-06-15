@@ -348,3 +348,10 @@ modules.xml
 .idea/sonarlint
 
 # End of https://www.toptal.com/developers/gitignore/api/rubymine+all,ruby,rails,react,node
+/public/packs
+/public/packs-test
+/node_modules
+/yarn-error.log
+yarn-debug.log*
+.yarn-integrity
+/app/assets/images/quickbuy-qr/

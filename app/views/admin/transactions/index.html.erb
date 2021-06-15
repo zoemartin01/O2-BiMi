@@ -1,0 +1,40 @@
+<div class="row">
+  <h1 class="display-3 text-center">Transactions</h1>
+</div>
+
+<div class="row">
+  <table class="table table-striped">
+    <thead class="thead-dark">
+    <tr>
+      <th>Drink</th>
+      <th>User</th>
+      <th>Booked By</th>
+      <th>Stock Change</th>
+      <th>Balance Change</th>
+      <th>Comment</th>
+      <th class="col-md-2"><%= link_to "New", new_admin_transaction_path, class: "btn btn-outline-primary", role: "button" %></th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @transactions.each do |transaction| %>
+      <tr>
+        <td>
+          <% if transaction.drink != nil %>
+              <%= transaction.drink.name %>
+          <% end %>
+        </td>
+        <td><%= transaction.user.name %></td>
+        <td><%= transaction.booked_by.name %></td>
+        <td><%= transaction.stock_change %></td>
+        <td><%= number_with_precision(transaction.balance_change, :precision => 2) %>€</td>
+        <td><%= transaction.comment %></td>
+        <td>
+          <%= link_to "More...", admin_transaction_path(transaction), class: "btn btn-outline-dark", role: "button" %>
+          <%= link_to "Undo", admin_transaction_path(transaction),
+                      method: :delete,
+                      data: { confirm: "Are you sure?" }, class: "btn btn-danger", role: "button"%></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

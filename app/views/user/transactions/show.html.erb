@@ -1,0 +1,39 @@
+<div class="row">
+  <h1 class="display-2 text-center">Transaction</h1>
+</div>
+
+
+<div class="row justify-content-center">
+  <div class="col-auto">
+    <table class="table table-borderless">
+      <tbody>
+      <% if @transaction.drink != nil %>
+        <tr>
+          <th>Drink</th>
+          <th><%= @transaction.drink.name %></th>
+        </tr>
+      <% end %>
+      <tr>
+        <th>Booked By</th>
+        <th><%= @transaction.booked_by.name %></th>
+      </tr>
+      <tr>
+        <th>Amount</th>
+        <th><%= @transaction.stock_change %></th>
+      </tr>
+      <tr>
+        <th>Balance Change</th>
+        <th><%= number_with_precision(@transaction.balance_change, :precision => 2) %>€</th>
+      </tr>
+      <tr>
+        <th>Comment</th>
+        <th><%= @transaction.comment %></th>
+      </tr>
+      <tr>
+        <th>Time</th>
+        <th><%= @transaction.created_at %></th>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

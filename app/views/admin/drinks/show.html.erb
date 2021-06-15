@@ -1,0 +1,67 @@
+<div class="row">
+  <h1 class="display-2 text-center"><%= @drink.name %></h1>
+</div>
+
+
+<div class="row justify-content-center">
+  <div class="col-auto">
+    <table class="table table-borderless">
+      <tbody>
+      <tr>
+        <th>Price</th>
+        <th><%= number_with_precision(@drink.price, :precision => 2) %>€</th>
+      </tr>
+      <tr>
+        <th>Stock</th>
+        <th><%= @drink.stock %></th>
+      </tr>
+      <tr>
+        <th>Enabled</th>
+        <th><%= check_box_tag @drink.enabled, @drink.enabled, @drink.enabled, class: "form-check-input", :disabled => true %></th>
+      </tr>
+      <tr>
+        <th>
+          <%= link_to "Edit", edit_admin_drink_path(@drink), class: "btn btn-outline-dark", role: "button" %>
+        </th>
+        <th>
+          <%= link_to "Delete", admin_drink_path(@drink), class: "btn btn-danger", role: "button",
+                      method: :delete,
+                      data: { confirm: "Are you sure?" } %>
+        </th>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<br>
+
+<div class="row">
+  <h1 class="display-3 text-center">Transactions</h1>
+</div>
+<div class="row">
+  <table class="table table-striped">
+    <thead class="thead-dark">
+    <tr>
+      <th>User</th>
+      <th>Booked By</th>
+      <th>Stock Change</th>
+      <th>Balance Change</th>
+      <th>Comment</th>
+      <th class="col-md-1"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @drink.transactions.each do |transaction| %>
+      <tr>
+        <td><%= transaction.user.name %></td>
+        <td><%= transaction.booked_by.name %></td>
+        <td><%= transaction.stock_change %></td>
+        <td><%= transaction.balance_change %>€</td>
+        <td><%= transaction.comment %></td>
+        <td><%= link_to "More...", transaction, class: "btn btn-outline-dark", role: "button"%></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

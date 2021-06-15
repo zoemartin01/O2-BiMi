@@ -1,0 +1,53 @@
+<div class="row">
+  <h1 class="display-3 text-center">Users</h1>
+</div>
+
+<div class="row">
+  <table class="table table-striped">
+    <thead class="thead-dark">
+    <tr>
+      <th>Name</th>
+      <th>Room</th>
+      <th>Balance</th>
+      <th class="col-md-1">Enabled</th>
+      <th class="col-md-1">Admin</th>
+      <th class="col-md-3"><%= link_to "New", new_admin_user_path, class: "btn btn-outline-primary", role: "button" %></th>
+    </tr>
+    </thead>
+    <tbody>
+    <% User.all.order(:name).each do |user| %>
+      <tr>
+        <td>
+          <%= user.name %>
+        </td>
+        <td>
+          <%= user.room %>
+        </td>
+        <td>
+          <% if user.balance < 0 %>
+            <span class="text-danger"><%= number_with_precision(user.balance, :precision => 2) %>€</span>
+          <% else %>
+            <%= number_with_precision(user.balance, :precision => 2) %>€
+          <% end %>
+        </td>
+        <td>
+          <div class="form-check form-check-inline">
+            <%= check_box_tag user.enabled, user.enabled, user.enabled, class: "form-check-input", :disabled => true %>
+          </div>
+        </td>
+        <td>
+          <div class="form-check form-check-inline">
+            <%= check_box_tag user.admin, user.admin, user.admin, class: "form-check-input", :disabled => true %>
+          </div>
+        </td>
+        <td>
+          <%= link_to "More...", admin_user_path(user), class: "btn btn-outline-dark", role: "button" %>
+          <%= link_to "Edit", edit_admin_user_path(user), class: "btn btn-outline-dark", role: "button" %>
+          <%= link_to "Delete", admin_user_path(user), class: "btn btn-danger", role: "button",
+                      method: :delete,
+                      data: { confirm: "Are you sure?" } %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

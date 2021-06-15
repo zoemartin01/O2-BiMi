@@ -1,0 +1,47 @@
+<div class="row">
+  <h1 class="display-3 text-center">Drinks</h1>
+</div>
+
+<div class="row">
+  <table class="table table-striped">
+    <thead class="thead-dark">
+    <tr>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Stock</th>
+      <th class="col-md-1">Enabled</th>
+      <th class="col-md-3"><%= link_to "New", new_admin_drink_path, class: "btn btn-outline-primary", role: "button" %></th>
+    </tr>
+    </thead>
+    <tbody>
+    <% Drink.all.order(:name).each do |drink| %>
+      <tr>
+        <td>
+          <%= drink.name %>
+        </td>
+        <td>
+          <%= number_with_precision(drink.price, :precision => 2) %>€
+        </td>
+        <td>
+          <% if drink.stock < 10 %>
+            <span class="text-danger"><%= drink.stock %></span>
+          <% else %>
+            <%= drink.stock %>
+          <% end %>
+        </td>
+        <td>
+          <div class="form-check form-check-inline">
+            <%= check_box_tag drink.enabled, drink.enabled, drink.enabled, class: "form-check-input", :disabled => true %>
+          </div>
+        </td>
+        <td>
+          <%= link_to "More...", admin_drink_path(drink), class: "btn btn-outline-dark", role: "button" %>
+          <%= link_to "Edit", edit_admin_drink_path(drink), class: "btn btn-outline-dark", role: "button" %>
+          <%= link_to "Delete", admin_drink_path(drink), class: "btn btn-danger", role: "button",
+                      method: :delete,
+                      data: { confirm: "Are you sure?" } %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

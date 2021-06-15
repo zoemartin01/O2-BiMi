@@ -1,0 +1,31 @@
+<div class="row">
+  <h1 class="display-3 text-center">Drinks</h1>
+</div>
+<div class="row">
+  <table class="table table-striped">
+    <thead class="thead-dark">
+    <tr>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Stock</th>
+      <th class="col-md-3"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @drinks.each do |drink| %>
+      <tr>
+        <td><%= drink.name %></td>
+        <td><%= number_with_precision(drink.price, precision: 2) %>€</td>
+        <td><%= drink.stock %></td>
+        <td>
+          <%= link_to "Buy", { controller: 'user/transactions', action: 'new', drink_id: drink.id}, class: "btn btn-outline-dark", role: "button"%>
+          <%= link_to "More...", drink, class: "btn btn-outline-dark", role: "button"%>
+          <%= link_to "Quick Buy", { controller: 'user/transactions', action: 'quick_buy', drink_id: drink.id, stock_change: 1 }, class: "btn btn-danger", role: "button",
+                      method: :get,
+                      data: { confirm: "Are you sure?" } %></td>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

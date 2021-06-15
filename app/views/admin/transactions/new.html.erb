@@ -1,0 +1,61 @@
+<div class="row">
+  <h1 class="display-2 text-center">New Transaction</h1>
+</div>
+
+<br>
+
+<div class="row justify-content-center">
+  <div class="col-sm-8">
+    <%= form_for @transaction, url: { controller: "admin/transactions", action: "create" }, html: { class: "nifty_form" } do |f| %>
+      <div class="form-group row pb-2 pt-2">
+        <%= f.label :stock_change, "Stock Change", class: "col-sm-2 col-form-label" %>
+        <div class="col-sm-10">
+          <%= f.number_field :stock_change, { class: "form-control", placeholder: "Stock Change" } %>
+        </div>
+      </div>
+      <div class="form-group row pb-2 pt-2">
+        <%= f.label :balance_change, "Balance Change", class: "col-sm-2 col-form-label" %>
+        <div class="col">
+          <div class="input-group">
+            <%= f.number_field :balance_change, { class: "form-control", step: "0.01", placeholder: "Balance Change", 'aria-describedby': "inputGroupPrepend" } %>
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroupPrepend">€</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row pb-2 pt-2">
+        <%= f.label :comment, "Comment (optional)", class: "col-sm-2 col-form-label" %>
+        <div class="col-sm-10">
+          <%= f.text_area :comment, { class: "form-control", step: "0.01", placeholder: "Comment", 'aria-describedby': "inputGroupPrepend" } %>
+        </div>
+      </div>
+      <div class="form-group row pb-2 pt-2">
+        <%= f.label :user, "User", class: "col-sm-2 col-form-label" %>
+        <div class="col-sm-10">
+          <%= f.collection_select :user_id, users, :id, :name, { prompt: true }, { class: "form-select" } %>
+        </div>
+      </div>
+      <div class="form-group row pb-2 pt-2">
+        <%= f.label :drink, "Drink", class: "col-sm-2 col-form-label" %>
+        <div class="col-sm-10">
+          <%= f.collection_select :drink_id, drinks, :id, :name, { prompt: true }, { class: "form-select" } %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col text-center">
+          <div class="form-check form-check-inline">
+            <%= check_box_tag :restock, "Restock", false, { class: "form-check-input" } %>
+            <%= label_tag :restock, "Drink Restock", class: "form-check-label" %>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col text-center">
+          <%= f.submit "Create", class: "btn btn-primary" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

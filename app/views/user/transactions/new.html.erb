@@ -1,0 +1,47 @@
+<div class="row">
+  <h1 class="display-2 text-center">Buy a Drink</h1>
+</div>
+
+<br>
+
+<div class="row justify-content-center">
+  <div class="col-sm-10">
+    <%= form_for @transaction, url: { action: "create" }, html: { class: "nifty_form" } do |f| %>
+      <div class="form-group row pb-2 pt-2">
+        <div class="col-sm-4 text-end">
+          <%= f.label :user, "Who is buying?", class: "col-form-label" %>
+        </div>
+        <div class="col-sm-6">
+          <%= f.collection_select :user_id, users, :id, :name, { :selected => current_user.id }, { class: "form-select" } %>
+        </div>
+      </div>
+      <div class="form-group row pb-2 pt-2">
+        <div class="col-sm-4 text-end">
+          <%= f.label :drink, "What are you buying?", class: "col-form-label" %>
+        </div>
+        <div class="col-sm-6">
+          <% if params[:drink_id] %>
+            <%= f.collection_select :drink_id, drinks, :id, :name, { :selected => params[:drink_id] }, { class: "form-select" } %>
+          <% else %>
+            <%= f.collection_select :drink_id, drinks, :id, :name, { prompt: true }, { class: "form-select" } %>
+          <% end %>
+        </div>
+      </div>
+      <div class="form-group row pb-2 pt-2">
+        <div class="col-sm-4 text-end">
+          <%= f.label :stock_change, "How many?", class: "col-form-label" %>
+        </div>
+        <div class="col-sm-6">
+          <%= f.number_field :stock_change, { class: "form-control", placeholder: "Amount", value: 1 } %>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col text-center">
+          <%= f.submit "Buy", class: "btn btn-primary" %>
+        </div>
+      </div>
+
+    <% end %>
+  </div>
+</div>

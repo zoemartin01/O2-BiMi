@@ -1,0 +1,43 @@
+<div class="row">
+  <h1 class="display-3 text-center"><%= current_user.name %>'s Transactions</h1>
+</div>
+<div class="row">
+  <table class="table">
+    <thead class="thead-dark">
+    <tr>
+      <th>Drink</th>
+      <th>User</th>
+      <th>Amount</th>
+      <th>Balance Change</th>
+      <th>Comment</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @transactions.each do |transaction| %>
+      <tr>
+        <td>
+          <% if transaction.drink != nil %>
+            <a href="<%= drink_path(transaction.drink) %>">
+              <%= transaction.drink.name %>
+            </a>
+          <% end %>
+        </td>
+        <td>
+          <a href="<%= user_path(transaction.user) %>"><%= transaction.user.name %></a>
+        </td>
+        <td>
+          <a href="<%= transaction_path(transaction) %>"><%= transaction.stock_change %></a>
+        </td>
+        <td>
+          <a href="<%= transaction_path(transaction) %>"><%= number_with_precision(transaction.balance_change, :precision => 2) %>€</a>
+        </td>
+        <td>
+          <a href="<%= transaction_path(transaction) %>"><%= transaction.comment %></a>
+        </td>
+        <td><%= link_to "Show", transaction %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

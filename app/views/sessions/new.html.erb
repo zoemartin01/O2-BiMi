@@ -1,0 +1,40 @@
+<div class="row">
+  <h1 class="display-2 text-center">Login</h1>
+</div>
+
+<br>
+
+<div class="row justify-content-center">
+  <div class="col-auto">
+    <%= form_tag '/login', class: "form-group" do %>
+      <div class="form-group">
+        <%= label :email, "E-Mail Address" %>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroupPrepend">@</span>
+          </div>
+          <%= text_field_tag :email, nil, { class: "form-control", placeholder: "E-Mail Address", 'aria-describedby': "inputGroupPrepend" } %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= label :password, "Password" %>
+        <%= password_field_tag :password, nil, { class: "form-control", placeholder: "Password" } %>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col text-center">
+          <div class="form-check form-check-inline">
+            <%= check_box_tag :remember_me, true, false, { class: "form-check-input" } %>
+            <%= label_tag :remember_me, "Remember Me", class: "form-check-label" %>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col text-center">
+          <%= submit_tag "Log in", class: "btn btn-primary" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

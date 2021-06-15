@@ -1,0 +1,75 @@
+<div class="row">
+  <h1 class="display-2 text-center">New User</h1>
+</div>
+
+<br>
+
+<div class="row justify-content-center">
+  <div class="col-sm-8">
+    <%= form_for @user, url: { action: "create" }, html: { class: "nifty_form" } do |f| %>
+      <div class="form-group row pb-2 pt-2">
+        <%= f.label :email, "E-Mail Address", class: "col-sm-2 col-form-label" %>
+        <div class="col">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroupPrepend">@</span>
+            </div>
+            <%= f.email_field :email, { class: "form-control", placeholder: @user.email, 'aria-describedby': "inputGroupPrepend" } %>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row pb-2 pt-2">
+        <%= f.label :name, "Name", class: "col-sm-2 col-form-label" %>
+        <div class="col-sm-10">
+          <%= f.text_field :name, { class: "form-control", placeholder: @user.name } %>
+        </div>
+      </div>
+      <div class="form-group row pb-2 pt-2">
+        <%= f.label :room, "Room", class: "col-sm-2 col-form-label" %>
+        <div class="col-sm-10">
+          <%= f.text_field :room, { class: "form-control", placeholder: @user.room } %>
+        </div>
+      </div>
+      <div class="form-group row pb-2 pt-2">
+        <%= f.label :balance, "Balance", class: "col-sm-2 col-form-label" %>
+        <div class="col">
+          <div class="input-group">
+            <%= f.text_field :balance, { class: "form-control", placeholder: @user.balance, 'aria-describedby': "inputGroupPrepend" } %>
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroupPrepend">€</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row pb-2 pt-2">
+        <%= f.label :password, "Password", class: "col-sm-2 col-form-label" %>
+        <div class="col-sm-10">
+          <%= f.password_field :password, { class: "form-control", placeholder: "Password" } %>
+        </div>
+      </div>
+      <div class="form-group row pb-2 pt-2">
+        <%= f.label :password_confirmation, "Password Confirmation", class: "col-sm-2 col-form-label" %>
+        <div class="col-sm-10">
+          <%= f.password_field :password_confirmation, { class: "form-control", placeholder: "Password Confirmation" } %>
+        </div>
+      </div>
+      <div class="text-center">
+        <div class="form-check form-check-inline">
+          <%= f.check_box :enabled, { class: "form-check-input" }, "true", "false" %>
+          <%= f.label :enabled, "Account Enabled", class: "form-check-label" %>
+        </div>
+        <div class="form-check form-check-inline">
+          <%= f.check_box :admin, { class: "form-check-input" }, "true", "false" %>
+          <%= f.label :admin, "Admin", class: "form-check-label" %>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col text-center">
+          <%= f.submit "Save", class: "btn btn-primary" %>
+        </div>
+      </div>
+
+    <% end %>
+  </div>
+</div>

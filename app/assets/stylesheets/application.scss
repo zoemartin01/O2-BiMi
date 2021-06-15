@@ -1,0 +1,23 @@
+@import "customize/variables";
+
+@import "bootstrap";
+
+.vertical-center {
+  min-height: 70%; /* Fallback for browsers do NOT support vh unit */
+  min-height: 70vh; /* These two lines are counted as one :-)       */
+
+  display: flex;
+  align-items: center;
+}
+
+.bg-navbar {
+  background-color: $cyan-400;
+}
+
+.no-deco {
+  text-decoration: none;
+}
+
+td.black {
+  border-color: #000;
+}
